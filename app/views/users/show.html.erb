@@ -1,0 +1,27 @@
+<h2>My Active Habits <a><%=link_to "+", new_habit_path, class: "btn btn-md btn-success float-right"%></a></h2>
+<div class="well col-md-12">
+  <% i = 0 %>
+  <% while i < current_user.habits.count %>
+    <% habit1 = current_user.habits[i] %>
+    <% habit2 = current_user.habits[i + 1] %>
+    <% habit3 = current_user.habits[i + 2] %>
+    <% habit4 = current_user.habits[i + 3] %>
+
+    <div class="row">
+      <div class="col-md-3">
+        <%= (render 'shared/habit_card', habit: habit1) if habit1.present?%>
+      </div>
+      <div class="col-md-3">
+        <%= (render 'shared/habit_card', habit: habit2) if habit2.present?%>
+      </div>
+      <div class="col-md-3">
+        <%= (render 'shared/habit_card', habit: habit3) if habit3.present?%>
+      </div>
+      <div class="col-md-3">
+        <%= (render 'shared/habit_card', habit: habit4) if habit4.present?%>
+      </div>
+    </div>
+    <% i += 4 %>
+  <% end %>
+</div>
+
