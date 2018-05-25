@@ -14,4 +14,24 @@ class User < ApplicationRecord
   def full_name
     return "#{self.first_name} #{self.last_name}"
   end
+
+  def self.search(param)
+    param.strip!
+    param.downcase!
+    
+  end
+
+  def self.first_name_search(param)
+  end
+
+  def self.last_name_search(param)
+  end
+
+  def self.email_search(param)
+  end
+
+  def matches(field, id)
+    return User.where("#{field} LIKE ? AND id != ?", "%#{param}%", id)
+  end
+
 end

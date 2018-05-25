@@ -1,0 +1,21 @@
+<div class="col-md-6 col-md-offset-0 left-align-padding"> 
+
+  <h4>Add Participants</h4>
+  <%= render 'shared/user_search' %>
+  <div id="user-search-results">
+    <%= render 'shared/user_search_results', results: nil %>
+  </div>
+  <hr>
+  <h4>Build Your Habit</h4>
+  <%= bootstrap_form_for(Habit.new) do |f| %>
+    <%= f.text_field :name, label: "Habit Name", autofocus: true %>
+    <%= f.text_area :description, label: "Habit Description", rows: 4, class: "text-area"%>
+    <%= f.select :frequency, 
+      [["Daily", 0], ["Weekly", 1]], 
+      {label: "I will do this habit:"} %>
+    <%= f.select :duration, 
+      [["1 cycle", 1], ["2 cycles", 2], ["3 cycles", 3], ["4 cycles", 4], ["5 cycles", 5]], 
+      {label: "I will do this habit for:"} %>
+    <%= f.submit "Create Habit", class: "btn btn-md btn-warning" %>
+  <% end %>
+</div>

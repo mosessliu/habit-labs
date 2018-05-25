@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   root 'welcome#home'
 
   resources :users, only: [:show]
+  post 'users/search', to: 'users#search'
+  
   resources :habits, except: [:edit, :update]
 
 end

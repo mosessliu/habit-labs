@@ -16,6 +16,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem "twitter-bootstrap-rails"
 gem 'jquery-rails'
 gem 'devise'
+gem "bootstrap_form", "~> 2.7"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

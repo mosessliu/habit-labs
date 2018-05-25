@@ -1,0 +1,4 @@
+<%= bootstrap_form_tag(url: users_search_path, remote: true) do |f| %>
+  <%= f.text_field :Search_friends, icon: "user"%>
+  <%= f.submit "Search", class: "btn btn-md btn-success"%>
+<% end %>
