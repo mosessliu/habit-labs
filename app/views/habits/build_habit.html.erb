@@ -1,4 +1,9 @@
+
+
  <div class="col-md-8 col-md-offset-2 left-align-padding"> 
+  <% if @habit.present? and @habit.errors.any? %>
+    <%= render 'shared/error_messages', object: @habit %>
+  <% end %>
   <h3>Build Your Habit</h3>
   <div class="panel panel-default">
     <div class="form-header">
@@ -7,7 +12,7 @@
     <div class="panel-body">
       <%= render 'shared/habit_participants', participants: session[:new_habit_participants] %> 
       <div style="margin-top:15px">  
-        <%= bootstrap_form_for(Habit.new) do |f| %>
+        <%= bootstrap_form_for(@habit) do |f| %>
           <%= f.text_field :name, label: "Habit Name", autofocus: true %>
           <%= f.text_area :description, label: "Habit Description", rows: 4, class: "text-area"%>
           <%= f.select :frequency, 

@@ -8,7 +8,9 @@
       <div id="habit-participants">
         <%= render 'shared/habit_participants', participants: session[:new_habit_participants] %>
       </div>
-      <%= render 'shared/user_search' %>
+      <div style="margin-top:20px">
+        <%= render 'shared/user_search' %>
+      </div>
       <div id="user-search-results">
         <%= render 'shared/user_search_results', results: nil %>
       </div>

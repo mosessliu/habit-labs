@@ -4,7 +4,6 @@ class Habit < ApplicationRecord
 
   validates :name, presence: true#, length: {minimum: 3}
   validates :description, presence: true#, length: {minimum: }
-  validates :username, presence: true, length: {minimum: 3, maximum: 12}
   validates :duration, presence: true
   validates :frequency, presence: true
 
