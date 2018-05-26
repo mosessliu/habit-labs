@@ -1,6 +1,6 @@
 class HabitsController < ApplicationController
 
-  FREQUENCY = {0 => "Daily", 1 => "Weekly"}
+  FREQUENCY_TO_MILLI= {0 => 0, 1 => 1}
 
 
   def new
@@ -57,7 +57,28 @@ class HabitsController < ApplicationController
   def assign_habit_to_participants
     for json in session[:new_habit_participants]
       user = User.get_object(json)
-      UserHabit.create(user: user, habit: @habit)
+      @user_habit = UserHabit.new(user: user, habit: @habit)
+      @user_habit.save
+      assign_deadlines_to_user_habit
+    end
+  end
+
+  def assign_deadlines_to_user_habit
+    current_date_time = DateTime.current
+    if @habit.frequency == 0 #daily case
+      i = 1
+      while i <= @habit.duration
+        deadline = current_date_time + i.days
+        UserHabitDeadline.create(user_habit: @user_habit, deadline: deadline)
+        i += 1
+      end
+    elsif @habit.frequency == 1 #weekly case
+      i = 1
+      while i <= @habit.duration
+        deadline = current_date_time + i.weeks
+        UserHabitDeadline.create(user_habit: @user_habit, deadline: deadline)
+        i += 1
+      end
     end
   end
 
