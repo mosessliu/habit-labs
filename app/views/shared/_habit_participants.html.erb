@@ -1,6 +1,6 @@
 <div>
   <%= bootstrap_flash %>
-  <% for json_participant in participants %>
-    <%= image_tag User.get_object(json_participant).gravatar_url, class: "profile-image" %>
+  <% for participant in participants %>
+    <%= image_tag User.get_object(participant).gravatar_url, class: "profile-image" %>
   <% end %>
 </div>

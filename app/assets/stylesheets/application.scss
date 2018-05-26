@@ -37,11 +37,8 @@
 
 .habit-card-title {
   color: darkslategray;
-  font-size: 1.5em;
+  font-size: 2.0em;
   font-weight: 500;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .habit-card-description {
@@ -83,6 +80,17 @@
 .thumbnail-user-search {
   background-color: rgb(255, 250, 249) !important;
 }
+
+.thumbnail {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.thumbnail:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 .form-header {
   color: slategrey;
   font-size: 1.5em;
@@ -104,4 +112,22 @@
 .remove-btn-elements {
   background-color: none;
   border-color: white;
+}
+
+.participants-label {
+  color: slategray;
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+.habit-name-label {
+  color: darkslategray;
+  font-size: 2.5em;
+  font-weight: 500;
+}
+
+.habit-description-label {
+  color: slategray;
+  font-size: 1.5em;
+  font-weight: 300;
 }

@@ -1,6 +1,9 @@
 <div class="thumbnail">
-  <div class="habit-card-title"> 
-    <%= link_to habit.name, habit_path(habit)%>
+  <div> 
+    <%= link_to habit.name, habit_path(habit), class: "habit-card-title"%>
+  </div>
+  <div class="habit-card-profile-images">
+    <%= render 'shared/habit_participants', participants: habit.users %>
   </div>
   <div class="habit-card-description"> 
     <%= habit.description %>

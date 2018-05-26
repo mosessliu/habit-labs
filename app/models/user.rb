@@ -46,8 +46,12 @@ class User < ApplicationRecord
     return User.where("#{field} LIKE ? AND id != ?", "%#{param}%", 1)
   end
 
-  def self.get_object(json)
-    return JSON.parse(json, object_class: User)
+  def self.get_object(u)
+    if u.class.name == "User"
+      return u
+    else
+      return JSON.parse(u, object_class: User)
+    end
   end
 
 end

@@ -1,1 +1,23 @@
-<h1>Wrong</h1>
+<div class="col-md-8 col-md-offset-2">
+  <div class="well">
+    <div align="left">
+      <div style="margin-bottom:10px"> 
+        <%= link_to "Back", user_path(current_user), class:"btn btn-md btn-warning"%> 
+      </div>
+      <div class="habit-name-label" style="margin-bottom:10px">
+        <%= @habit.name %>
+      </div>
+      <div class="participants-label">
+        Participants
+      </div>
+      <%= render 'shared/habit_participants', participants: @habit.users%>
+      <hr>
+      <div class="habit-description-label" style="margin-bottom:15px">
+        <%= @habit.description %>
+      </div>
+      <div align="center">
+        <%= link_to "Complete Habit!", "#", class: "custom-btn remove-btn-elements"%>
+      </div>
+    </div>
+  </div>
+</div>
