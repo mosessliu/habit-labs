@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_24_230225) do
+ActiveRecord::Schema.define(version: 2018_05_26_210744) do
 
   create_table "habits", force: :cascade do |t|
     t.string "name"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 2018_05_24_230225) do
     t.integer "frequency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_habit_deadlines", force: :cascade do |t|
+    t.integer "user_habit_id"
+    t.datetime "deadline"
+    t.index ["user_habit_id"], name: "index_user_habit_deadlines_on_user_habit_id"
   end
 
   create_table "user_habits", force: :cascade do |t|

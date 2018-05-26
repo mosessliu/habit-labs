@@ -1,5 +1,5 @@
 <h2>My Active Habits <a><%=link_to "+", new_habit_path, class: "btn btn-md btn-success float-right"%></a></h2>
-<div class="well col-md-12" style="margin-top:15px">
+<div class="col-md-12" style="margin-top:15px">
   <% i = 0 %>
   <% while i < current_user.habits.count %>
     <% habit1 = current_user.habits[i] %>
