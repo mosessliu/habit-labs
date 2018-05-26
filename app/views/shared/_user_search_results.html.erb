@@ -1,3 +1,22 @@
+<% if params[:controller] == "users" %>
+  <%= bootstrap_flash %>
+<% end %>
 <% if results.present? %>
-  
+  <hr>
+  <% for result in results %>
+    <div class="thumbnail thumbnail-user-search col-md-3" style="margin-top:20px">
+      <div style="margin:10px" align="center">
+        <%= image_tag result.gravatar_url, class: "profile-image" %>
+      </div>
+      <div class="user-name">
+        <%= result.full_name %>
+      </div>
+      <div class="user-user-name" style="margin-bottom:5px">
+        @<%= result.username %>
+      </div>
+      <div align="center">
+        <%= link_to "Add", habits_add_participant_path(added_participant: result), method: :post, remote: true%>
+      </div>
+    </div>
+  <% end %>
 <% end %>

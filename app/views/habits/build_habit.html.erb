@@ -1,0 +1,26 @@
+ <div class="col-md-8 col-md-offset-2 left-align-padding"> 
+  <h3>Build Your Habit</h3>
+  <div class="panel panel-default">
+    <div class="form-header">
+      Participants
+    </div>
+    <div class="panel-body">
+      <%= render 'shared/habit_participants', participants: session[:new_habit_participants] %> 
+      <div style="margin-top:15px">  
+        <%= bootstrap_form_for(Habit.new) do |f| %>
+          <%= f.text_field :name, label: "Habit Name", autofocus: true %>
+          <%= f.text_area :description, label: "Habit Description", rows: 4, class: "text-area"%>
+          <%= f.select :frequency, 
+            [["Daily", 0], ["Weekly", 1]], 
+            {label: "I will do this habit:"} %>
+          <%= f.select :duration, 
+            [["1 cycle", 1], ["2 cycles", 2], ["3 cycles", 3], ["4 cycles", 4], ["5 cycles", 5]], 
+            {label: "I will do this habit for:"} %>
+          <div align="center">
+            <%= f.submit "Create Habit", class: "custom-btn remove-btn-elements" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

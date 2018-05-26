@@ -59,3 +59,49 @@
 .text-area {
   resize: none;
 }
+
+.profile-image {
+  height: 3em;
+  width: 3em;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.user-name {
+  color: darkslategray;
+  size: 2.5em;
+  font-weight: 400;
+  text-align: center;
+}
+.user-user-name {
+  color: slategrey;
+  size: 2.0em;
+  font-weight: 300;
+  text-align: center;
+}
+
+.thumbnail-user-search {
+  background-color: rgb(255, 250, 249) !important;
+}
+.form-header {
+  color: slategrey;
+  font-size: 1.5em;
+  font-weight: 300;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+.custom-btn {
+  color: darkslategrey;
+  font-size: 1.35em;
+  font-weight: 300;
+}
+
+.custom-btn:hover{
+  color: lightgray;
+  text-decoration: none;
+}
+
+.remove-btn-elements {
+  background-color: none;
+  border-color: white;
+}

@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   post 'users/search', to: 'users#search'
   
   resources :habits, except: [:edit, :update]
+  post 'habits/add_participant', to: 'habits#add_participant'
+  get 'build_habit', to: 'habits#build_habit'
 
 end

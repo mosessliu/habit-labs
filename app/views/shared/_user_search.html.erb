@@ -1,4 +1,10 @@
-<%= bootstrap_form_tag(url: users_search_path, remote: true) do |f| %>
-  <%= f.text_field :Search_friends, icon: "user"%>
-  <%= f.submit "Search", class: "btn btn-md btn-success"%>
+<%= form_with(url: users_search_path, remote: true) do |f| %>
+  <div class="form-group" style="margin-top:0px">
+    <div class="col-md-10 left-align-padding right-align-padding">
+      <%= f.text_field :Search_friends, class:"form-control"%>
+    </div>
+    <div class="col-md-2">
+      <%= f.submit "Search", class: "btn btn-md btn-success"%>
+    </div>
+  </div>
 <% end %>
