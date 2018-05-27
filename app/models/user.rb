@@ -49,8 +49,8 @@ class User < ApplicationRecord
   def self.get_object(u)
     if u.class.name == "User"
       return u
-    else
-      return JSON.parse(u, object_class: User)
+    else #otherwise its an id
+      return User.find(u)
     end
   end
 

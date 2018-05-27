@@ -1,16 +1,13 @@
 class HabitsController < ApplicationController
 
-  FREQUENCY_TO_MILLI= {0 => 0, 1 => 1}
-
-
   def new
     set_default_participants
   end
 
   def add_participant
-    added_participant= User.find(params[:added_participant])
-
-    session[:new_habit_participants].push(added_participant.to_json)
+    id = params[:added_participant]
+    session[:new_habit_participants].push(id)
+    added_participant = User.find(id)
     flash.now[:success] = "You have added #{added_participant.full_name} as a participant!"
 
     respond_to do |format|
@@ -26,7 +23,9 @@ class HabitsController < ApplicationController
   def create
     @habit = create_habit
     if @habit.save
+      @current_date_time = DateTime.current
       assign_habit_to_participants
+      set_habit_end_datetime
       redirect_to root_path
     else
       render 'habits/build_habit.html'
@@ -37,12 +36,11 @@ class HabitsController < ApplicationController
     @habit = Habit.find(params[:id])
   end
 
-
-
   private
   def set_default_participants
-    session[:new_habit_participants] = [current_user.to_json, User.first.to_json]
+    session[:new_habit_participants] = [current_user.id]
   end
+
   def create_habit
     habit_params = params[:habit]
 
@@ -55,8 +53,6 @@ class HabitsController < ApplicationController
   end
 
   def assign_habit_to_participants
-    @current_date_time = DateTime.current
-    
     for json in session[:new_habit_participants]
       user = User.get_object(json)
       @user_habit = UserHabit.new(user: user, habit: @habit)
@@ -81,6 +77,17 @@ class HabitsController < ApplicationController
         i += 1
       end
     end
+  end
+
+  def set_habit_end_datetime
+    if @habit.frequency == 0
+      end_datetime = @current_date_time + @habit.duration.days
+    elsif @habit.frequency == 1
+      end_datetime = @current_date_time + @habit.duration.weeks
+    end
+    
+    @habit.end_datetime = end_datetime
+    @habit.save
   end
 
 end
