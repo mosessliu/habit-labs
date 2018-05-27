@@ -25,6 +25,7 @@ class HabitsController < ApplicationController
     if @habit.save
       @current_date_time = DateTime.current
       assign_habit_to_participants
+      send_invitation_to_participants
       set_habit_end_datetime
       redirect_to root_path
     else
@@ -53,8 +54,8 @@ class HabitsController < ApplicationController
   end
 
   def assign_habit_to_participants
-    for json in session[:new_habit_participants]
-      user = User.get_object(json)
+    for id in session[:new_habit_participants]
+      user = User.get_object(id)
       @user_habit = UserHabit.new(user: user, habit: @habit)
       @user_habit.save
       assign_deadlines_to_user_habit
@@ -75,6 +76,16 @@ class HabitsController < ApplicationController
         deadline = @current_date_time + i.weeks
         UserHabitDeadline.create(user_habit: @user_habit, deadline: deadline)
         i += 1
+      end
+    end
+  end
+
+  def send_invitation_to_participants
+    participant_ids = session[:new_habit_participants]
+    if participant_ids.count > 1
+      habit_invitation = HabitInvitation.create(habit: @habit)
+      for id in session[:new_habit_participants]
+        UserHabitInvitation.create(user_id: id, habit_invitation: habit_invitation) if id.to_s != current_user.id.to_s
       end
     end
   end
