@@ -1,5 +1,7 @@
 <div>
-  <%= bootstrap_flash %>
+  <% if params[:controller] == "habits"%>
+    <%= bootstrap_flash %>
+  <% end %>
   <% for participant in participants %>
     <%= image_tag User.get_object(participant).gravatar_url, class: "profile-image" %>
   <% end %>

@@ -20,30 +20,30 @@ class User < ApplicationRecord
     return "#{self.first_name} #{self.last_name}"
   end
 
-  def self.search(param)
+  def self.search(param, id)
     param.strip!
     param.downcase!
 
-    results = self.first_name_search(param) + self.last_name_search(param) + self.email_search(param)
+    results = self.first_name_search(param, id) + self.last_name_search(param, id) + self.email_search(param, id)
 
     results = results.uniq
     return results
   end
 
-  def self.first_name_search(param)
-    return matches("first_name", param)
+  def self.first_name_search(param, id)
+    return matches("first_name", param, id)
   end
 
-  def self.last_name_search(param)
-    return matches("last_name", param)
+  def self.last_name_search(param, id)
+    return matches("last_name", param, id)
   end
 
-  def self.email_search(param)
-    return matches("email", param)
+  def self.email_search(param, id)
+    return matches("email", param, id)
   end
 
-  def self.matches(field, param)
-    return User.where("#{field} LIKE ? AND id != ?", "%#{param}%", 1)
+  def self.matches(field, param, id)
+    return User.where("#{field} LIKE ? AND id != ?", "%#{param}%", id)
   end
 
   def self.get_object(u)

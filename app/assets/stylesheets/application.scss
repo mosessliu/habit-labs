@@ -64,6 +64,10 @@
   margin-right: 5px;
 }
 
+.profile-image-faded {
+  opacity: 0.1;
+}
+
 .user-name {
   color: darkslategray;
   size: 2.5em;
@@ -79,12 +83,6 @@
 
 .thumbnail-user-search {
   background-color: rgb(255, 250, 249) !important;
-}
-
-.thumbnail {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  border-radius: 5px;
 }
 
 .thumbnail:hover {
@@ -109,15 +107,34 @@
   text-decoration: none;
 }
 
+.complete-habit {
+  background-color:rgb(119, 255, 218);
+  padding: 12.5px;
+  font-size: 20px;
+  color: darkslategrey;
+  font-size: 1.35em;
+  font-weight: 300;
+}
+
+.incomplete-habit {
+  background-color:rgb(255, 150, 150);
+  padding: 12.5px;
+}
+
+.incomplete-habit:hover{
+  color: white;
+}
+
 .remove-btn-elements {
   background-color: none;
   border-color: white;
 }
 
-.participants-label {
+.habit-label {
   color: slategray;
   font-size: 1.2em;
   font-weight: 300;
+  margin-bottom: 5px;
 }
 
 .habit-name-label {
@@ -130,4 +147,35 @@
   color: slategray;
   font-size: 1.25em;
   font-weight: 400;
+}
+
+.separator {
+  background-color:lightgray;
+  height: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.achievement-history {
+  color: darkslategray;
+  font-size: 1.15em;
+  font-weight: 400;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.achievement-history-future {
+  color: lightgray;
+  font-size: 1.15em;
+  font-weight: 400;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.habit-creation-title {
+  color: slategray;
+  font-size: 2.5em;
+  font-weight: 100;
 }

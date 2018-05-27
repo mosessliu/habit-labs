@@ -1,0 +1,3 @@
+$('#achievement-history').html("<%= j (render 'habits/achievement_history.html', habit: @habit, user_habit: @user_habit, show_deadline_limit: @limit) %>")
+// complete habit button UI change
+$('#completion-button').html("<%= j(render 'habits/completion_button.html', user_habit: @user_habit, habit: @habit) %>")

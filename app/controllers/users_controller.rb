@@ -5,9 +5,13 @@ class UsersController < ApplicationController
 
   def search
     param = params[:Search_friends]
-    @results = User.search(param)
-    if @results.count == 0 && param.present?
-      flash.now[:danger] = "No results matched query #{params[:Search_friends]}"
+    if param.blank?
+      @results = nil
+    else
+      @results = User.search(param, current_user.id)
+      if @results.count == 0
+        flash.now[:danger] = "No results matched query '#{params[:Search_friends]}'"
+      end
     end
 
     respond_to do |format|

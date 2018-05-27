@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   post 'habits/add_participant', to: 'habits#add_participant'
   get 'build_habit', to: 'habits#build_habit'
 
+  patch 'complete_habit', to: 'user_habit_deadlines#complete_habit'
+
 end

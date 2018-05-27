@@ -1,0 +1,9 @@
+<% if UserHabitDeadline.get_next_user_habit_deadline(user_habit).completed %>
+  <div align="center" class="complete-habit">
+    Habit Complete!
+  </div>
+  <% else %>
+  <div align="center" class="incomplete-habit">
+    <%= link_to "Complete Habit!", complete_habit_path(habit_id: habit), method: :patch, class: "custom-btn", remote: true%>
+  </div>
+<% end %>

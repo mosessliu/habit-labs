@@ -1,9 +1,10 @@
-
-
- <div class="col-md-8 col-md-offset-2 left-align-padding"> 
+<div class="col-md-8 col-md-offset-2 left-align-padding"> 
   <% if @habit.present? and @habit.errors.any? %>
     <%= render 'shared/error_messages', object: @habit %>
   <% end %>
+  <div class="habit-creation-title" align="center">
+    Create a new habit:
+  </div>
   <h3>Build Your Habit</h3>
   <div class="panel panel-default">
     <div class="form-header">

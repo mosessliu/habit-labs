@@ -5,7 +5,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Habit Labs</a>
+    <%= link_to "Habit Labs", root_path, class: "navbar-brand" %>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <% if user_signed_in? %>
         <ul class="nav navbar-nav col-md-8">

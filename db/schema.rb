@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_26_210744) do
+ActiveRecord::Schema.define(version: 2018_05_26_214813) do
 
   create_table "habits", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2018_05_26_210744) do
   create_table "user_habit_deadlines", force: :cascade do |t|
     t.integer "user_habit_id"
     t.datetime "deadline"
+    t.boolean "completed", default: false
     t.index ["user_habit_id"], name: "index_user_habit_deadlines_on_user_habit_id"
   end
 

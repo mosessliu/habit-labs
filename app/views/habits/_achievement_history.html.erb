@@ -1,0 +1,32 @@
+<% users = habit.users %>
+<% deadlines = user_habit.user_habit_deadlines %>
+<% i = 0 %>
+<% while i < deadlines.count%>
+  <% deadline = deadlines[i].deadline %>
+  <div class="row"> 
+    <% if show_deadline_limit >= deadline%>
+      <div class="achievement-history col-md-2">
+        <%= "Day #{i + 1}:" %>
+      </div>
+      <% j = 0 %>
+      <% while j < users.count %>
+        <% user = users[j] %>
+        <% temp_user_habit = UserHabit.where(user: user, habit: habit).first%>
+        <% user_habit_deadline = UserHabitDeadline.where(user_habit: temp_user_habit, deadline: deadline).first %>
+        <div class="col-md-1">
+          <% if user_habit_deadline.completed %>
+            <%= image_tag User.get_object(user).gravatar_url, class: "profile-image" %>
+          <% else %>
+            <%= image_tag User.get_object(user).gravatar_url, class: "profile-image profile-image-faded" %>
+          <% end %>
+        </div>
+        <% j += 1 %>
+      <% end %>
+    <% else %>
+      <div class="achievement-history-future col-md-2">
+        <%= "Day #{i + 1}:" %>
+      </div>
+    <% end %>
+  </div>
+  <% i += 1 %>
+<% end %>

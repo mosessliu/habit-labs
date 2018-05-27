@@ -1,8 +1,4 @@
-<% if params[:controller] == "users" %>
-  <%= bootstrap_flash %>
-<% end %>
 <% if results.present? %>
-  <hr>
   <% for result in results %>
     <div class="thumbnail thumbnail-user-search col-md-3" style="margin-top:20px">
       <div style="margin:10px" align="center">
@@ -19,4 +15,10 @@
       </div>
     </div>
   <% end %>
+<% end %>
+
+<% if params[:controller] == "users" %>
+  <div class="row"%>
+    <%= bootstrap_flash %>
+  </div>
 <% end %>
