@@ -64,6 +64,13 @@
   margin-right: 5px;
 }
 
+.profile-image-small {
+  height: 2.4em;
+  width: 2.4em;
+  border-radius: 50%;
+  margin-top: 8px;
+}
+
 .profile-image-faded {
   opacity: 0.1;
 }
@@ -178,4 +185,27 @@
   color: slategray;
   font-size: 2.5em;
   font-weight: 100;
+}
+
+.nav-bar-link {
+  font-size: 1.25em;
+  margin-bottom: 0 !important;
+  font-weight: 300;
+  color: darkslategray;
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+  margin-bottom: 0 !important;
+  font-weight: 400;
+  color: darkslategray;
+}
+
+.navbar-right {
+  font-weight: 600;
+  margin-bottom: 0 !important;
+}
+
+.navbar {
+  background-color: rgb(242, 245, 252)
 }

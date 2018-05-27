@@ -1,18 +1,15 @@
 <div class="navbar navbar-default navbar-static-top">
   <div class="container">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
     <%= link_to "Habit Labs", root_path, class: "navbar-brand" %>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <% if user_signed_in? %>
-        <ul class="nav navbar-nav col-md-8">
-          <li><%= link_to "My Profile", user_path(current_user)%></li>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "My Profile", user_path(current_user), class:"nav-bar-link"%></li>
+          <li><%= link_to "Notifications", "#", class:"nav-bar-link"%></li>
         </ul>
-        <ul class="navbar-right col-md-2">
-          <div class="nav navbar-nav navbar-right">
+        <ul class="navbar-right">
+          <div class="nav navbar-nav">
+            <li><%= image_tag User.get_object(current_user).gravatar_url, class: "profile-image-small" %></li>
             <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
           </div>
         </ul>

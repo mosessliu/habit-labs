@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     else
       @results = User.search(param, current_user.id)
       already_selected_users = session[:new_habit_participants]
-      @results = @results.select {|user| !already_selected_users.include?(user.id.to_s)}
+      @results = @results.select {|user| !already_selected_users.include?(user.id.to_sç)}
       if @results.count == 0
         flash.now[:danger] = "No results matched query '#{params[:Search_friends]}'"
       end
