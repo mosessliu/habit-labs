@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :user_habits
   has_many :habits, through: :user_habits
 
+  has_many :user_habit_invitations
+  has_many :habit_invitations, through: :user_habit_invitations
+
   include Gravtastic
   gravtastic
 

@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_27_040400) do
+ActiveRecord::Schema.define(version: 2018_05_27_060511) do
+
+  create_table "habit_invitations", force: :cascade do |t|
+    t.integer "habit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_habit_invitations_on_habit_id"
+  end
 
   create_table "habits", force: :cascade do |t|
     t.string "name"
@@ -27,6 +34,15 @@ ActiveRecord::Schema.define(version: 2018_05_27_040400) do
     t.datetime "deadline"
     t.boolean "completed", default: false
     t.index ["user_habit_id"], name: "index_user_habit_deadlines_on_user_habit_id"
+  end
+
+  create_table "user_habit_invitations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "habit_invitation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_invitation_id"], name: "index_user_habit_invitations_on_habit_invitation_id"
+    t.index ["user_id"], name: "index_user_habit_invitations_on_user_id"
   end
 
   create_table "user_habits", force: :cascade do |t|
