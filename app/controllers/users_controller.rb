@@ -2,6 +2,11 @@ class UsersController < ApplicationController
   before_action :delete_expired_habits, only: [:show]
   
   def show
+
+    #dont display habits that are actually still a notification
+    @active_habits = current_user.habits.select do |habit| 
+      current_user.habit_invitations.where(habit_id: habit.id).count == 0
+    end
   end
 
   def search

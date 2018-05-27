@@ -1,11 +1,11 @@
 <h2>My Active Habits <a><%=link_to "Create a new habit!", new_habit_path, class: "btn btn-md btn-success float-right"%></a></h2>
 <div class="col-md-12" style="margin-top:15px">
   <% i = 0 %>
-  <% while i < current_user.habits.count %>
-    <% habit1 = current_user.habits[i] %>
-    <% habit2 = current_user.habits[i + 1] %>
-    <% habit3 = current_user.habits[i + 2] %>
-    <% habit4 = current_user.habits[i + 3] %>
+  <% while i < @active_habits.count %>
+    <% habit1 = @active_habits[i] %>
+    <% habit2 = @active_habits[i + 1] %>
+    <% habit3 = @active_habits[i + 2] %>
+    <% habit4 = @active_habits[i + 3] %>
 
     <div class="row">
       <div class="col-md-3 left-align-padding">
