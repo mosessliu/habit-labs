@@ -1,33 +1,9 @@
-<% user_habit = UserHabit.where(user: current_user, habit: @habit).first%>
 <div class="col-md-8 col-md-offset-2">
-  <div class="well" style="margin-bottom:0">
-    <div align="left">
-      <div style="margin-bottom:10px"> 
-        <%= link_to "Back", user_path(current_user), class:"btn btn-md btn-warning"%> 
-      </div>
-      <div class="habit-name-label" style="margin-bottom:10px">
-        <%= @habit.name %>
-      </div>
-      <div class="habit-label">
-        Participants:
-      </div>
-      <div style="margin-bottom:10px">
-      <%= render 'shared/habit_participants', participants: @habit.users%>
-      </div>
-      <div class="habit-description-label">
-        <%= @habit.description %>
-      </div>
-      <div class="separator"></div>
-      <div class="habit-label">
-        Achievement History:
-      </div>
-      <div id="achievement-history">
-        <% limit = @habit.frequency == 0 ? DateTime.current + 1.days : DateTime.current + 1.weeks %>
-        <%= render 'habits/achievement_history.html', habit: @habit, user_habit: user_habit, show_deadline_limit: limit %>
-      </div>
-    </div>
+  <div style="margin-bottom:10px"> 
+    <%= link_to "Back", user_path(current_user), class:"btn btn-md btn-warning"%> 
   </div>
+  <%= render 'shared/show_habit.html', habit: @habit, user_habit: @user_habit%>
   <div id="completion-button">
-    <%= render 'habits/completion_button.html', user_habit: user_habit, habit: @habit %>
+    <%= render 'habits/completion_button.html', user_habit: @user_habit, habit: @habit %>
   </div>
 </div>

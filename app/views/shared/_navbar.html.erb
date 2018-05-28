@@ -5,7 +5,7 @@
       <% if user_signed_in? %>
         <ul class="nav navbar-nav">
           <li><%= link_to "My Profile", user_path(current_user), class:"nav-bar-link"%></li>
-          <li><%= link_to "Notifications", "#", class:"nav-bar-link"%></li>
+          <li><%= link_to "Notifications", notifications_path, class:"nav-bar-link"%></li>
         </ul>
         <ul class="navbar-right">
           <div class="nav navbar-nav">

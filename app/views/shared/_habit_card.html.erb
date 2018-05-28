@@ -1,12 +1,25 @@
+<% is_invitation = params[:controller] == 'notifications' %>
 <div class="well" style="padding:20px">
-  <div style="margin-bottom:15px"> 
-    <%= link_to habit.name, habit_path(habit), class: "habit-card-title"%>
+  <div style="margin-bottom:5px">
+    <% if is_invitation %>
+      <%= link_to habit.name, show_habit_invitation_path(habit_id: habit), class: "habit-card-title"%>
+    <% else %>
+      <%= link_to habit.name, habit_path(habit), class: "habit-card-title"%>  
+    <% end %> 
+  </div>
+  <div class="habit-label smaller">
+    Participants
   </div>
   <div class="habit-card-profile-images" style="margin-bottom:10px">
     <%= render 'shared/habit_participants', participants: habit.users %>
   </div>
-  <hr>
+  <div class="line-separator"></div>
   <div class="habit-description-label"> 
     <%= habit.description %>
   </div>
+  <% if is_invitation %>
+    <div align="center" style="margin-top: 15px">
+      <%= link_to "Accept Invitation", accept_habit_invitation_path(habit_id: habit), class: "custom-btn"%>
+    </div>
+  <% end %>
 </div>

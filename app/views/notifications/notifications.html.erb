@@ -1,0 +1,5 @@
+<h3>Notifications</h3>
+<hr>
+<h4>Habit Invitations (<%=current_user.habit_invitations.count%>)</h4>
+<%= render 'shared/habit_row', habits: @pending_habits %>
+<hr>

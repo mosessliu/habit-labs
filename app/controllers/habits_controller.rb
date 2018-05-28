@@ -34,7 +34,21 @@ class HabitsController < ApplicationController
   end
 
   def show
-    @habit = Habit.find(params[:id])
+    @habit= Habit.find(params[:id])
+    @user_habit = UserHabit.where(user: current_user, habit: @habit).first
+  end
+
+  def accept_habit_invitation
+    #accept habit by deleting the user's user_habit_invitation
+    habit = Habit.find(params[:habit_id])
+    habit_invitation = habit.habit_invitation
+    user_habit_invitation = UserHabitInvitation.where(user: current_user, habit_invitation: habit_invitation).first
+    if user_habit_invitation.destroy!
+      flash[:success] = "You have accepted your invitation to '#{habit.name}'"
+    else
+      flash[:danger] = "Unable to accept invitation to '#{habit.name}'. Try again later."
+    end
+    redirect_to root_path
   end
 
   private
@@ -49,6 +63,9 @@ class HabitsController < ApplicationController
     description = habit_params[:description]
     frequency = habit_params[:frequency]
     duration = habit_params[:duration]
+    
+    name.strip!
+    description.strip!
 
     return Habit.new(name: name, description: description, frequency: frequency, duration: duration)
   end

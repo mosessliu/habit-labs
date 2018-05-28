@@ -1,0 +1,9 @@
+<div class="col-md-8 col-md-offset-2">
+  <div style="margin-bottom:10px"> 
+    <%= link_to "Back", notifications_path, class:"btn btn-md btn-warning"%> 
+  </div>
+  <%= render 'shared/show_habit.html', habit: @habit, user_habit: @user_habit%>
+  <div class="accept-habit" align="center">
+    <%= link_to "Accept Invitation", accept_habit_invitation_path(habit_id: @habit), class: "custom-btn" %>
+  </div>
+</div>
