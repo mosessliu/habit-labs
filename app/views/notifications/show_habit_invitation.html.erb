@@ -4,6 +4,6 @@
   </div>
   <%= render 'shared/show_habit.html', habit: @habit, user_habit: @user_habit%>
   <div class="accept-habit" align="center">
-    <%= link_to "Accept Invitation", accept_habit_invitation_path(habit_id: @habit), class: "custom-btn" %>
+    <%= link_to "Accept Invitation", accept_habit_invitation_path(habit_id: @habit), method: :post, class: "custom-btn" %>
   </div>
 </div>

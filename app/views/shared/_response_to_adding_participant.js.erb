@@ -1,3 +1,5 @@
 $('#habit-participants').html("<%= j (render 'shared/habit_participants.html', participants: session[:new_habit_participants]) %>")
 
+$('#participants-label').html("<%= j (render 'habits/participants_label.html', participants: session[:new_habit_participants]) %>")
+
 $('#user-search-results').html("<%= j (render 'shared/user_search_results.html', results: nil) %>")

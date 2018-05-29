@@ -59,16 +59,14 @@ html, body {
 
 .habit-card-title {
   color: darkslategray;
-  font-size: 2.0em;
+  font-size: 1.6em;
   font-weight: 500;
 }
 
 .habit-card-description {
   color: slategray;
   font-size: 1.25em;
-  font-weight: 250;
-  padding-left: 15px;
-  padding-right: 15px;
+  font-weight: 300;
 }
 
 .well {
@@ -276,4 +274,21 @@ html, body {
   font-size: 2.0em;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.habit-card {
+  height: 250px;
+  position: relative;
+}
+
+.habit-card {
+  height: 280px;
+  position: relative;
+}
+
+.anchor-bottom {
+  position:absolute;
+  bottom: 15px;
+  align-content: center;
+  transform: translateX(33%)
 }

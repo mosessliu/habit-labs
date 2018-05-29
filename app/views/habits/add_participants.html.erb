@@ -1,15 +1,16 @@
+<% participants = session[:new_habit_participants] %>
 <div class="col-md-8 col-md-offset-2 left-align-padding"> 
   <div class="habit-creation-title" align="center">
     Create a new habit:
   </div>
   <h3>Add Participants!</h3>
   <div class="panel panel-default">
-    <div class="form-header">
-      Current Participants
+    <div id="participants-label">
+      <%= render 'habits/participants_label', participants: participants %>
     </div>
     <div class="panel-body">
       <div id="habit-participants">
-        <%= render 'shared/habit_participants', participants: session[:new_habit_participants] %>
+        <%= render 'shared/habit_participants', participants: participants %>
       </div>
       <div style="margin-top:20px">
         <%= render 'shared/user_search' %>

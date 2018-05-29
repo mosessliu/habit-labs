@@ -2,17 +2,23 @@ class HabitsController < ApplicationController
 
   def new
     set_default_participants
+    render 'habits/add_participants'
   end
 
   def add_participant
-    id = params[:added_participant]
-    session[:new_habit_participants].push(id)
-    added_participant = User.find(id)
-    flash.now[:success] = "You have added #{added_participant.full_name} as a participant!"
+    if session[:new_habit_participants].count >= 5
+      flash.now[:danger] = "You cannot invite anymore participants to this habit!"
+    else
+      id = params[:added_participant]
+      session[:new_habit_participants].push(id)
+      added_participant = User.find(id)
+      flash.now[:success] = "You have added #{added_participant.full_name} as a participant!"
+    end
 
     respond_to do |format|
-       format.js {render partial: "shared/response_to_adding_participant.js"}
+      format.js {render partial: "shared/response_to_adding_participant.js"}
     end
+
   end
 
   def build_habit
@@ -37,7 +43,6 @@ class HabitsController < ApplicationController
     @habit= Habit.find(params[:id])
     @user_habit = UserHabit.where(user: current_user, habit: @habit).first
     if @user_habit.blank?
-      
       #habit does not exist for this user
       redirect_to root_path
     end
@@ -62,17 +67,8 @@ class HabitsController < ApplicationController
   end
 
   def create_habit
-    habit_params = params[:habit]
-
-    name = habit_params[:name]
-    description = habit_params[:description]
-    frequency = habit_params[:frequency]
-    duration = habit_params[:duration]
-    
-    name.strip!
-    description.strip!
-
-    return Habit.new(name: name, description: description, frequency: frequency, duration: duration)
+    habit_params = params.require(:habit).permit(:name, :description, :frequency, :duration)
+    return Habit.new(habit_params)
   end
 
   def assign_habit_to_participants
