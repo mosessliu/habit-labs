@@ -16,6 +16,28 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+html, body {
+  margin:0 !important;
+  padding:0 !important;
+  height:100%;
+}
+
+.bg {
+  background-image: url(asset_path("background.jpg"));
+
+  /* Full height */
+  height: 100%; 
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
 .left-align-padding {
   padding-left: 0;
 }
@@ -234,4 +256,24 @@
   background:lightgray;
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.center {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.home-title {
+  font-size: 4.5em;
+  font-weight: 300;
+  color: darkslategray;
+}
+
+.title-btn {
+  font-size: 2.0em;
+  margin-left: 10px;
+  margin-right: 10px;
 }

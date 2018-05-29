@@ -38,7 +38,10 @@
   </head>
   <body>
     <%= render 'shared/navbar' %>
-    <div class="container">
+    <% if params[:controller] == "welcome" %>
+      <%= yield %>
+    <% else %>
+      <div class="container">
       <div class="row">
         <div class="col-md-12">
           <%= bootstrap_flash %>
@@ -51,6 +54,6 @@
       </footer>
 
     </div> <!-- /container -->
-
+    <% end %>
   </body>
 </html>

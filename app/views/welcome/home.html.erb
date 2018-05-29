@@ -1,2 +1,12 @@
-<h3>HOME PAGE</h3>
-<%= link_to "Login", new_user_session_path %>
+<div class="bg">
+  <div class="center" align="center">
+    <div class="home-title">
+      Welcome to Habit Labs
+    </div>
+    <div>
+    <%= link_to "Login", new_user_session_path, class: "custom-btn title-btn" %>|<%= link_to "Sign Up", new_user_registration_path, class: "custom-btn title-btn" %>
+    </div>
+  </div>
+</bg>
+
+
