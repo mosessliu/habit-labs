@@ -10,8 +10,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true, length: {minimum: 1}
   validates :username, presence: true, length: {minimum: 3, maximum: 12}
 
-  has_many :user_habits
-  has_many :habits, through: :user_habits
+  has_many :user_habits, dependent: :destroy
+  has_many :habits, through: :user_habits, dependent: :destroy
 
   has_many :user_habit_invitations
   has_many :habit_invitations, through: :user_habit_invitations
