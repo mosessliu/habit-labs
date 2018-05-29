@@ -36,6 +36,11 @@ class HabitsController < ApplicationController
   def show
     @habit= Habit.find(params[:id])
     @user_habit = UserHabit.where(user: current_user, habit: @habit).first
+    if @user_habit.blank?
+      
+      #habit does not exist for this user
+      redirect_to root_path
+    end
   end
 
   def accept_habit_invitation
