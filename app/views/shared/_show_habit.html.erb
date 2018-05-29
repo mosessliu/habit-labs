@@ -7,10 +7,17 @@
       Participants:
     </div>
     <div style="margin-bottom:10px">
-    <%= render 'shared/habit_participants', participants: habit.users%>
+      <%= render 'shared/habit_participants', participants: habit.users%>
     </div>
     <div class="habit-description-label">
       <%= habit.description %>
+    </div>
+    <div class="separator"></div>
+    <div class="habit-label">
+      Habit Information:
+    </div>
+    <div class="habit-data-label">
+      <%= render 'habits/habit_information', habit: habit%>
     </div>
     <div class="separator"></div>
     <div class="habit-label">

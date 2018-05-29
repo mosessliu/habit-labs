@@ -1,0 +1,8 @@
+<div style="margin-bottom: 10px">
+  <% frequency = habit.frequency == 0 ? "daily" : "weekly" %>
+  <% duration = habit.frequency == 0 ? "day" : "week" %>
+  This is a <strong><%=frequency%></strong> habit, lasting <strong><%= "#{pluralize(habit.duration, duration)}"%></strong>.
+</div>
+<div id="habit-completion-status"style="margin-bottom: 10px">
+    <%= render 'habits/habit_completion_status.html', habit: habit %>
+</div>

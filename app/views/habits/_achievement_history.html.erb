@@ -6,7 +6,11 @@
   <div class="row"> 
     <% if show_deadline_limit >= deadline%>
       <div class="achievement-history col-md-2">
-        <%= "Day #{i + 1}:" %>
+        <% if habit.frequency == 0 %>
+          <%= "Day #{i + 1}:" %>
+        <% else %>
+          <%= "Week #{i + 1}:" %>
+        <% end %>
       </div>
       <% j = 0 %>
       <% while j < users.count %>
