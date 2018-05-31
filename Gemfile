@@ -18,6 +18,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem "bootstrap_form", "~> 2.7"
 gem 'gravtastic'
+gem 'rails-controller-testing'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

@@ -81,20 +81,11 @@ class HabitsController < ApplicationController
   end
 
   def assign_deadlines_to_user_habit
-    if @habit.frequency == 0 #daily case
-      i = 1
-      while i <= @habit.duration
-        deadline = @current_date_time + i.days
-        UserHabitDeadline.create(user_habit: @user_habit, deadline: deadline)
-        i += 1
-      end
-    elsif @habit.frequency == 1 #weekly case
-      i = 1
-      while i <= @habit.duration
-        deadline = @current_date_time + i.weeks
-        UserHabitDeadline.create(user_habit: @user_habit, deadline: deadline)
-        i += 1
-      end
+    increment = @habit.is_daily? ? 1.day : 1.week
+    for i in 1..@habit.duration do
+      deadline = @current_date_time + (i * increment)
+      UserHabitDeadline.create(user_habit: @user_habit, deadline: deadline)
+      i += 1
     end
   end
 
@@ -118,5 +109,4 @@ class HabitsController < ApplicationController
     @habit.end_datetime = end_datetime
     @habit.save
   end
-
 end
