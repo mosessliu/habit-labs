@@ -20,6 +20,11 @@ gem "bootstrap_form", "~> 2.7"
 gem 'gravtastic'
 gem 'rails-controller-testing'
 
+# gems for react
+gem 'webpacker', '~> 3.5'
+gem 'react-rails'
+
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
