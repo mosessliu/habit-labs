@@ -4,6 +4,10 @@
   </div>
   <%= render 'shared/show_habit.html', habit: @habit, user_habit: @user_habit%>
   <div id="completion-button">
-    <%= render 'habits/completion_button.html', user_habit: @user_habit, habit: @habit %>
+    <% if @habit.finished %>
+      <%= render 'habits/refresh_habit_button.html', habit: @habit %>
+    <% else %>
+      <%= render 'habits/completion_button.html', user_habit: @user_habit, habit: @habit %>
+    <% end %>
   </div>
 </div>

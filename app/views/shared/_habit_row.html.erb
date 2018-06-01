@@ -1,25 +1,23 @@
-<div class="col-md-12" style="margin-top:15px">
-  <% i = 0 %>
-  <% while i < habits.count %>
-    <% habit1 = habits[i] %>
-    <% habit2 = habits[i + 1] %>
-    <% habit3 = habits[i + 2] %>
-    <% habit4 = habits[i + 3] %>
+<% i = 0 %>
+<% while i < habits.count %>
+  <% habit1 = habits[i] %>
+  <% habit2 = habits[i + 1] %>
+  <% habit3 = habits[i + 2] %>
+  <% habit4 = habits[i + 3] %>
 
-    <div class="row">
-      <div class="col-md-3 left-align-padding">
-        <%= (render 'shared/habit_card', habit: habit1) if habit1.present?%>
-      </div>
-      <div class="col-md-3 left-align-padding">
-        <%= (render 'shared/habit_card', habit: habit2) if habit2.present?%>
-      </div>
-      <div class="col-md-3 left-align-padding">
-        <%= (render 'shared/habit_card', habit: habit3) if habit3.present?%>
-      </div>
-      <div class="col-md-3 left-align-padding">
-        <%= (render 'shared/habit_card', habit: habit4) if habit4.present?%>
-      </div>
+  <div class="row">
+    <div class="col-md-3">
+      <%= (render 'shared/habit_card', habit: habit1) if habit1.present?%>
     </div>
-    <% i += 4 %>
-  <% end %>
-</div>
+    <div class="col-md-3">
+      <%= (render 'shared/habit_card', habit: habit2) if habit2.present?%>
+    </div>
+    <div class="col-md-3">
+      <%= (render 'shared/habit_card', habit: habit3) if habit3.present?%>
+    </div>
+    <div class="col-md-3">
+      <%= (render 'shared/habit_card', habit: habit4) if habit4.present?%>
+    </div>
+  </div>
+<% i += 4 %>
+<% end %>

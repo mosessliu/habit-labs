@@ -1,0 +1,5 @@
+class AddFinishedColToHabits < ActiveRecord::Migration[5.2]
+  def change
+    add_column :habits, :finished, :boolean, default: false
+  end
+end

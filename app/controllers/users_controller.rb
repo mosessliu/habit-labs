@@ -1,11 +1,21 @@
 class UsersController < ApplicationController
-  before_action :delete_expired_habits, only: [:show]
+  before_action :mark_finished_habits, only: [:show]
   
   def show
     @invited_habit_ids = []
-    current_user.habit_invitations.each {|inv| @invited_habit_ids.push(inv.habit_id)}
+    current_user.habit_invitations.each {|invite| @invited_habit_ids << invite.habit_id}
     #dont display habits that are actually still a notification
-    @active_habits = current_user.habits.select {|habit| !@invited_habit_ids.include?(habit.id)}
+    @active_habits = []
+    @finished_habits =[]
+    current_user.habits.each do |habit|
+      if not @invited_habit_ids.include?(habit.id)
+        if habit.finished
+          @finished_habits << habit
+        else
+          @active_habits << habit
+        end
+      end
+    end
   end
 
   def search
@@ -28,17 +38,15 @@ class UsersController < ApplicationController
   end
 
   private
-  def delete_expired_habits
+  def mark_finished_habits
     if params[:id].to_s == current_user.id.to_s
       current_datetime = DateTime.current
       for habit in current_user.habits
         if habit.end_datetime < current_datetime
-          puts habit.name
-          puts habit.id
-          habit.destroy!
+          habit.finished = true
+          habit.save
         end
       end
     end
   end
-
 end

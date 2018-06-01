@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'accept_habit_invitation', to: 'habits#accept_habit_invitation'
   
   patch 'complete_habit', to: 'user_habit_deadlines#complete_habit'
+  patch 'refresh_habit', to: 'habits#refresh_habit'
   
   get 'notifications', to: 'notifications#notifications'
   get 'show_habit_invitation', to: 'notifications#show_habit_invitation'

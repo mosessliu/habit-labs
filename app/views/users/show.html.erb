@@ -1,5 +1,8 @@
 <h3>My Profile</h3>
 <hr>
-<h4>My Active Habits <a><%=link_to "Create a new habit!", new_habit_path, class: "btn btn-md btn-success float-right"%></a></h4>
+<h4 style="margin-bottom:15px">My Active Habits <a><%=link_to "Create a new habit!", new_habit_path, class: "btn btn-md btn-success float-right"%></a></h4>
 <%= render 'shared/habit_row.html', habits: @active_habits%>
+<hr>
+<h4 style="margin-bottom:15px">My Finished Habits</h4>
+<%= render 'shared/habit_row.html', habits: @finished_habits%>
 

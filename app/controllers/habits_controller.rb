@@ -61,6 +61,10 @@ class HabitsController < ApplicationController
     redirect_to root_path
   end
 
+  def refresh_habit
+
+  end
+
   private
   def set_default_participants
     session[:new_habit_participants] = [current_user.id]

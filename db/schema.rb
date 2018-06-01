@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_27_060511) do
+ActiveRecord::Schema.define(version: 2018_06_01_054612) do
 
   create_table "habit_invitations", force: :cascade do |t|
     t.integer "habit_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2018_05_27_060511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "end_datetime"
+    t.boolean "finished", default: false
   end
 
   create_table "user_habit_deadlines", force: :cascade do |t|
