@@ -5,11 +5,13 @@ import Timestamp from "react-timestamp"
 class Countdown extends React.Component {
 
   constructor(props) {
+    console.log("was created");
     super(props);
     this.tick = this.tick.bind(this);
   }
 
   componentDidMount() {
+    console.log("did mount");
     this.timerID = setInterval(
       this.tick,
       1000
