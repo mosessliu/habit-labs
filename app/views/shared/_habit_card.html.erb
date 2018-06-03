@@ -16,7 +16,7 @@
     Participants
   </div>
   <div class="habit-card-profile-images" style="margin-bottom:10px">
-    <%= render 'shared/habit_participants', participants: habit.users %>
+    <%= render 'shared/habit_participants', participants: habit.users, can_edit: false %>
   </div>
   <div class="line-separator"></div>
   <div class="habit-card-description"> 

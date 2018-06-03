@@ -1,4 +1,4 @@
-$('#habit-participants').html("<%= j (render 'shared/habit_participants.html', participants: session[:new_habit_participants]) %>")
+$('#habit-participants').html("<%= j (render 'shared/habit_participants.html', participants: session[:new_habit_participants], can_edit: true) %>")
 
 $('#participants-label').html("<%= j (render 'habits/participants_label.html', participants: session[:new_habit_participants]) %>")
 

@@ -10,7 +10,7 @@
     </div>
     <div class="panel-body">
       <div id="habit-participants">
-        <%= render 'shared/habit_participants', participants: participants %>
+        <%= render 'shared/habit_participants', participants: participants, can_edit: true %>
       </div>
       <div style="margin-top:20px">
         <%= render 'shared/user_search' %>
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div align="center" style="margin-bottom:15px"> 
-      <%= link_to "Continue", build_habit_path, class: "custom-btn"%>
+      <%= link_to "Continue", build_habit_new_path, class: "custom-btn"%>
     </div>
   </div>
 </div>

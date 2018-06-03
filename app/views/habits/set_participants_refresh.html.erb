@@ -1,0 +1,26 @@
+<% participants = session[:new_habit_participants] %>
+<div class="col-md-8 col-md-offset-2 left-align-padding"> 
+  <div class="habit-creation-title" align="center">
+    Refresh a habit:
+  </div>
+  <h3>Add Participants!</h3>
+  <div class="panel panel-default">
+    <div id="participants-label">
+      <%= render 'habits/participants_label', participants: participants %>
+    </div>
+    <div class="panel-body">
+      <div id="habit-participants">
+        <%= render 'shared/habit_participants', participants: participants, can_edit: true %>
+      </div>
+      <div style="margin-top:20px">
+        <%= render 'shared/user_search' %>
+      </div>
+      <div id="user-search-results">
+        <%= render 'shared/user_search_results', results: nil %>
+      </div>
+    </div>
+    <div align="center" style="margin-bottom:15px"> 
+      <%= link_to "Continue", build_habit_refresh_path(habit_id: @habit), class: "custom-btn"%>
+    </div>
+  </div>
+</div>

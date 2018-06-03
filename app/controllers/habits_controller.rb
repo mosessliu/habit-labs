@@ -1,8 +1,8 @@
 class HabitsController < ApplicationController
 
   def new
-    set_default_participants
-    render 'habits/add_participants'
+    set_default_participant
+    render 'habits/set_participants_new'
   end
 
   def add_participant
@@ -16,14 +16,29 @@ class HabitsController < ApplicationController
     end
 
     respond_to do |format|
-      format.js {render partial: "shared/response_to_adding_participant.js"}
+      format.js {render partial: "shared/response_to_change_in_participants.js"}
     end
 
   end
 
-  def build_habit
+  def remove_participant
+    to_be_removed = params[:participant_id]
+
+
+    if to_be_removed.to_s == current_user.id.to_s
+      flash.now[:danger] = "You must be a part of habits you create."
+    else
+      flash.now[:success] = "You have removed #{User.find(to_be_removed).full_name} from this habit"
+      session[:new_habit_participants].delete_if { |user_id| user_id.to_s == to_be_removed.to_s} 
+    end
+    respond_to do |format|
+      format.js {render partial: "shared/response_to_change_in_participants.js"}
+    end
+  end
+
+  def build_habit_new
     @habit = Habit.new
-    render 'habits/build_habit.html'
+    render 'habits/build_habit_new.html'
   end
 
   def create
@@ -35,7 +50,7 @@ class HabitsController < ApplicationController
       set_habit_end_datetime
       redirect_to root_path
     else
-      render 'habits/build_habit.html'
+      render 'habits/build_habit_new.html'
     end
   end
 
@@ -62,12 +77,48 @@ class HabitsController < ApplicationController
   end
 
   def refresh_habit
+    @habit = Habit.find(params[:habit_id])
+    set_default_participants(@habit.users)
+    render 'habits/set_participants_refresh'
+  end
 
+  def build_habit_refresh
+    @habit = Habit.find(params[:habit_id])
+    puts(@habit)
+    render 'habits/build_habit_refresh.html'
+  end
+
+  def create_refreshed_habit
+    create_habit
+    @habit = create_habit
+    if @habit.save
+      @current_date_time = DateTime.current
+      assign_habit_to_participants
+      send_invitation_to_participants
+      set_habit_end_datetime
+
+      old_habit = Habit.find(params[:old_id])
+      old_habit.destroy!
+      redirect_to root_path
+    else
+      render 'habits/build_habit_refresh.html'
+    end
   end
 
   private
-  def set_default_participants
+  def set_default_participant
     session[:new_habit_participants] = [current_user.id]
+  end
+
+  def set_default_participants(users)
+    session[:new_habit_participants] = []
+    for user in users
+      if user.id.to_s == current_user.id.to_s
+        session[:new_habit_participants].insert(0, user.id)
+      else
+        session[:new_habit_participants] << user.id
+      end
+    end
   end
 
   def create_habit

@@ -30,11 +30,11 @@ class CreateHabitTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'users/show'
 
-    # new_habit_path renders habits/add_participants
+    # new_habit_path renders habits/set_participants_new
     get new_habit_path
-    assert_template 'habits/add_participants'
+    assert_template 'habits/set_participants_new'
 
-    get build_habit_path
+    get build_habit_new_path
     
     assert_difference 'Habit.count', 1 do 
       assert_difference 'UserHabit.count', 1 do
@@ -62,11 +62,11 @@ class CreateHabitTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'users/show'
 
-    # new_habit_path renders habits/add_participants
+    # new_habit_path renders habits/set_participants_new
     get new_habit_path
-    assert_template 'habits/add_participants'
+    assert_template 'habits/set_participants_new'
 
-    get build_habit_path
+    get build_habit_new_path
     
     assert_difference 'Habit.count', 1 do 
       assert_difference 'UserHabit.count', 1 do
@@ -100,7 +100,7 @@ class CreateHabitTest < ActionDispatch::IntegrationTest
       post habits_add_participant_path(added_participant: @user1.id), xhr: true
     end
     
-    get build_habit_path
+    get build_habit_new_path
     
     assert_difference 'Habit.count', 1 do 
       assert_difference 'UserHabit.count', 2 do
@@ -119,6 +119,4 @@ class CreateHabitTest < ActionDispatch::IntegrationTest
     assert_template 'users/show'
 
   end
-
-
 end

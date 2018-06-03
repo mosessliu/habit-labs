@@ -11,7 +11,10 @@
       Participants
     </div>
     <div class="panel-body">
-      <%= render 'shared/habit_participants', participants: session[:new_habit_participants] %> 
+      <%= render 'shared/habit_participants', 
+        participants: session[:new_habit_participants],
+        can_edit: false
+        %> 
       <div style="margin-top:15px">  
         <%= bootstrap_form_for(@habit) do |f| %>
           <%= f.text_field :name, label: "Habit Name", autofocus: true %>

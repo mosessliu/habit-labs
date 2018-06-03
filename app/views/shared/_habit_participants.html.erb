@@ -1,8 +1,22 @@
 <div>
   <% if params[:controller] == "habits"%>
+    <% img_style = "profile-image" %>
     <%= bootstrap_flash %>
+  <% else %>
+    <% img_style = "profile-image-small" %>
   <% end %>
   <% for participant in participants %>
-    <%= image_tag User.get_object(participant).gravatar_url, class: "profile-image" %>
+    <span class="habit-participant">
+      <% obj = User.get_object(participant) %>
+      <%= image_tag obj.gravatar_url, class: img_style%>
+      <% if can_edit && current_user.id != obj.id%>
+        <%= link_to "x", 
+          habits_remove_participant_path(participant_id: obj), 
+          method: :post, 
+          remote: true,
+          class: "remove-user" 
+        %>
+      <% end %>
+    </span>
   <% end %>
 </div>

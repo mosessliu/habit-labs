@@ -307,3 +307,18 @@ html, body {
   font-weight: 300;
 }
 
+.remove-user {
+  margin-left: -5px;
+  font-size: 1.5em;
+  font-weight: 300;
+  vertical-align: 10px;
+  color: rgb(201, 211, 226);
+}
+
+.remove-user:hover {
+  text-decoration: none;
+}
+
+.habit-participant {
+  margin-left: 10px;
+}

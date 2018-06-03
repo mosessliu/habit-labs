@@ -7,4 +7,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  
+  def force_finish!(habit)
+    habit.end_datetime = DateTime.current - 1
+  end
 end

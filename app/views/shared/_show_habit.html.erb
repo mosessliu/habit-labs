@@ -7,7 +7,7 @@
       Participants:
     </div>
     <div style="margin-bottom:10px">
-      <%= render 'shared/habit_participants', participants: habit.users%>
+      <%= render 'shared/habit_participants', participants: habit.users, can_edit: false%>
     </div>
     <div class="habit-description-label">
       <%= habit.description %>
