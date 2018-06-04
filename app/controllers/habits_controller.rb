@@ -36,6 +36,15 @@ class HabitsController < ApplicationController
     end
   end
 
+  def back_to_edit_participants
+    if is_habit_refresh?
+      @habit = Habit.find(params[:habit_id])
+      render 'habits/set_participants_refresh'
+    else
+      render 'habits/set_participants_new'
+    end
+  end
+
   def build_habit_new
     @habit = Habit.new
     render 'habits/build_habit_new.html'
@@ -84,8 +93,7 @@ class HabitsController < ApplicationController
 
   def build_habit_refresh
     @habit = Habit.find(params[:habit_id])
-    puts(@habit)
-    render 'habits/build_habit_refresh.html'
+    render 'habits/build_habit_refresh'
   end
 
   def create_refreshed_habit
@@ -97,8 +105,8 @@ class HabitsController < ApplicationController
       send_invitation_to_participants
       set_habit_end_datetime
 
-      old_habit = Habit.find(params[:old_id])
-      old_habit.destroy!
+      # old_habit = Habit.find(params[:old_id])
+      # old_habit.destroy!
       redirect_to root_path
     else
       render 'habits/build_habit_refresh.html'
@@ -163,5 +171,9 @@ class HabitsController < ApplicationController
     
     @habit.end_datetime = end_datetime
     @habit.save
+  end
+
+  def is_habit_refresh?
+    return params[:habit_id].present?
   end
 end

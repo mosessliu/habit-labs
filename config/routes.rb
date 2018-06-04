@@ -10,13 +10,18 @@ Rails.application.routes.draw do
   resources :habits, except: [:edit, :update]
   post 'habits/add_participant', to: 'habits#add_participant'
   post 'habits/remove_participant', to: 'habits#remove_participant'
+
+  get 'back_to_edit_participants', to: 'habits#back_to_edit_participants'
+
   get 'build_habit_new', to: 'habits#build_habit_new'
-  get 'build_habit_refresh', to: 'habits#build_habit_refresh'
+  post 'build_habit_refresh', to: 'habits#build_habit_refresh'
+
   post 'create_refreshed_habit', to: 'habits#create_refreshed_habit'
   post 'accept_habit_invitation', to: 'habits#accept_habit_invitation'
   
+  get 'refresh_habit', to: 'habits#refresh_habit'
   patch 'complete_habit', to: 'user_habit_deadlines#complete_habit'
-  patch 'refresh_habit', to: 'habits#refresh_habit'
+  
   
   get 'notifications', to: 'notifications#notifications'
   get 'show_habit_invitation', to: 'notifications#show_habit_invitation'

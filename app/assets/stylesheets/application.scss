@@ -120,9 +120,22 @@ html, body {
   color: slategrey;
   font-size: 1.5em;
   font-weight: 300;
-  margin-top: 15px;
+  margin-top: 5px;
   margin-left: 15px;
 }
+
+.back-btn {
+  color: rgb(41, 153, 131);
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.back-btn:hover {
+  color: lightgray;
+  text-decoration: none;
+}
+
 .custom-btn {
   color: darkslategrey;
   font-size: 1.35em;
