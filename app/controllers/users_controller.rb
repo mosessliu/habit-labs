@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   def show
     @invited_habit_ids = []
     current_user.habit_invitations.each {|invite| @invited_habit_ids << invite.habit_id}
-    #dont display habits that are actually still a notification
+    
+    # dont display habits that are actually still a notification
     @active_habits = []
     @finished_habits =[]
     current_user.habits.each do |habit|

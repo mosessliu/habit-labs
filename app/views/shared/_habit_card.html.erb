@@ -4,6 +4,17 @@
 <% else %>
 <div class="well habit-card habit-card-extended" style="padding:20px">
 <% end %>
+  <% if habit.finished %>
+    <div style="margin-bottom:15px">
+      <%= link_to "Remove", 
+        untrack_finished_habit_path(habit_id: habit), 
+        method: :post,
+        remote: true,
+        data: {confirm: "Are you sure you want to remove this habit from your history?"},
+        class: "custom-btn smaller float-right"
+      %>
+    </div>
+  <% end %>
   <div style="margin-bottom:5px">
     <% name = habit.name.truncate(25) %>
     <% if is_invitation %>

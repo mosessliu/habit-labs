@@ -16,4 +16,8 @@ kate:
   first_name: kate
   last_name: katie
 
-# column: value
+moses:
+  email: moses@test.com
+  username: mosliu
+  first_name: moses
+  last_name: liu

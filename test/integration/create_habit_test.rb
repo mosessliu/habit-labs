@@ -3,120 +3,125 @@ require 'test_helper'
 class CreateHabitTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
-  def setup
-    @user = User.create(
-      username: "John", 
-      email: "john@example.com", 
-      first_name: "John",
-      last_name: "Liu",
-      password: "password",
-    )
+  test "create a new habit for 1 user, with duration = 1 cycle" do 
+    moses = users(:moses)
+    habit_with_duration_1 = habits(:habit_with_duration_1)
 
-    @user1 = User.create(
-      username: "Moses", 
-      email: "Moses@example.com", 
-      first_name: "Moses",
-      last_name: "Liu",
-      password: "password",
-    )
+    sign_in(moses)
+
+    get new_habit_path
+    assert_template 'habits/set_participants_new'
+    get build_habit_new_path
+    assert_template 'habits/build_habit_new'
+
+    assert_difference 'Habit.count', 1 do
+      assert_difference 'moses.habits.count', 1 do
+        create_habit(habit_with_duration_1)
+      end
+    end
+
+    habit = moses.habits.last
+
+    assert moses.user_habits.last.user_habit_deadlines.count == 1
+
+    assert_redirected_to root_path
+    follow_redirect!
+    assert_redirected_to user_path(moses)
+    follow_redirect!
+
+    assert_template 'users/show'
+    assert_select 'a[href=?]', habit_path(habit), text: habit.name
+
   end
 
-  test "create a new habit for a single user, with duration = 1 cycle" do 
-    sign_in @user
+  test "create a new habit for 1 user, with duration = 3 cycles" do 
+    moses = users(:moses)
+    habit_with_duration_3 = habits(:habit_with_duration_3)
 
-    #assert that when accessing the root path leads us to the user's profile
-    get root_path
-    assert_redirected_to user_path(@user)
+    sign_in(moses)
+
+    get new_habit_path
+    assert_template 'habits/set_participants_new'
+    get build_habit_new_path
+    assert_template 'habits/build_habit_new'
+
+    assert_difference 'Habit.count', 1 do
+      assert_difference 'moses.habits.count', 1 do
+        create_habit(habit_with_duration_3)
+      end
+    end
+
+    habit = moses.habits.last
+
+    assert moses.user_habits.last.user_habit_deadlines.count == 3
+
+    assert_redirected_to root_path
     follow_redirect!
-    assert_template 'users/show'
+    assert_redirected_to user_path(moses)
+    follow_redirect!
 
-    # new_habit_path renders habits/set_participants_new
+    assert_template 'users/show'
+    assert_select 'a[href=?]', habit_path(habit), text: habit.name
+  end
+
+  test "create a new habit for 3 users, with a duration of 3 cycles" do
+    moses = users(:moses)
+    kate = users(:kate)
+    bob = users(:bob)
+    habit_with_duration_3 = habits(:habit_with_duration_3)
+
+    sign_in(moses)
+
     get new_habit_path
     assert_template 'habits/set_participants_new'
 
+    add_participant_to_habit(kate)
+    add_participant_to_habit(bob)
+
     get build_habit_new_path
-    
-    assert_difference 'Habit.count', 1 do 
-      assert_difference 'UserHabit.count', 1 do
-        assert_difference 'UserHabitDeadline.count', 1 do
-          post habits_path, params: {habit: {name: "Run", description: "run run run", frequency: 0, duration: 1}}
+    assert_template 'habits/build_habit_new'
+    assert session[:new_habit_participants].count == 3
+
+    # assert the correct number of userhabitdeadlines are being created
+
+    assert_difference 'Habit.count', 1 do
+      assert_difference 'moses.habits.count', 1 do
+        assert_difference 'UserHabitDeadline.count', 9 do
+          create_habit(habit_with_duration_3, true)
         end
       end
     end
 
+    assert moses.user_habits.last.user_habit_deadlines.count == 3
+
+    habit = moses.habits.last
     assert_redirected_to root_path
     follow_redirect!
-
-    assert_redirected_to user_path(@user)
+    assert_redirected_to user_path(moses)
     follow_redirect!
 
     assert_template 'users/show'
-  end
+    assert_select 'a[href=?]', habit_path(habit), text: habit.name
 
-  test "create a new habit for one user, with duration = 3 cycles" do 
-    sign_in @user
+    sign_out(moses)
 
-    #assert that when accessing the root path leads us to the user's profile
-    get root_path
-    assert_redirected_to user_path(@user)
-    follow_redirect!
-    assert_template 'users/show'
-
-    # new_habit_path renders habits/set_participants_new
-    get new_habit_path
-    assert_template 'habits/set_participants_new'
-
-    get build_habit_new_path
+    habit = Habit.last
     
-    assert_difference 'Habit.count', 1 do 
-      assert_difference 'UserHabit.count', 1 do
-        assert_difference 'UserHabitDeadline.count', 3 do
-          post habits_path, params: {habit: {name: "Run", description: "run run run", frequency: 0, duration: 3}}
-        end
-      end
-    end
-
-    assert_redirected_to root_path
-    follow_redirect!
-
-    assert_redirected_to user_path(@user)
-    follow_redirect!
-
-    assert_template 'users/show'
-
-  end
-
-  test "create a new habit for two users, with a duration of 5 cycles" do
-    sign_in @user
+    # assert invited participants received invitation
     
-    get new_habit_path
-    assert 'habits/add_participants'
+    sign_in(kate)
+    get notifications_path
+    assert_template 'notifications/notifications'
+    assert_select 'a[href=?]', show_habit_invitation_path(habit_id: habit), text: habit.name
+    assert kate.habit_invitations.count == 1
+    sign_out(kate)
 
-    post users_search_path, xhr: true, params: {Search_friends: "Moses"}
-    
-    assert partial: "shared/user_search_results"
-    
-    assert_difference 'session[:new_habit_participants].count', 1 do
-      post habits_add_participant_path(added_participant: @user1.id), xhr: true
-    end
-    
-    get build_habit_new_path
-    
-    assert_difference 'Habit.count', 1 do 
-      assert_difference 'UserHabit.count', 2 do
-        assert_difference 'UserHabitDeadline.count', 10 do
-          post habits_path, params: {habit: {name: "Run", description: "run run run", frequency: 0, duration: 5}}
-        end
-      end
-    end
-
-    assert_redirected_to root_path
-    follow_redirect!
-
-    assert_redirected_to user_path(@user)
-    follow_redirect!
-
-    assert_template 'users/show'
+    sign_in(bob)
+    get notifications_path
+    assert_template 'notifications/notifications'
+    assert_select 'a[href=?]', show_habit_invitation_path(habit_id: habit), text: habit.name
+    assert bob.habit_invitations.count == 1
+    sign_out(bob)
 
   end
 end

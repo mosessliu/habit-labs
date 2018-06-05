@@ -47,7 +47,7 @@ class HabitsController < ApplicationController
 
   def build_habit_new
     @habit = Habit.new
-    render 'habits/build_habit_new.html'
+    render 'habits/build_habit_new'
   end
 
   def create
@@ -82,6 +82,7 @@ class HabitsController < ApplicationController
     else
       flash[:danger] = "Unable to accept invitation to '#{habit.name}'. Try again later."
     end
+    habit_invitation.destroy_if_obselete!
     redirect_to root_path
   end
 
@@ -128,7 +129,7 @@ class HabitsController < ApplicationController
     if habit.finished and user_habit.present?
 
       user_habit.destroy!
-      @habits = current_user.habits
+      @habits = current_user.habits.where(finished: true)
 
       respond_to do |format|
         format.js {render partial: 'users/response_to_untrack_finished_habit.js'}

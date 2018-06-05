@@ -6,7 +6,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   test 'a Habit with 1 participant, with duration 1 increases UserHabitDeadline by 1' do
     habit_with_duration_1 = habits(:habit_with_duration_1)
     bob = users(:bob)
-
+    
     sign_in(bob)
 
     assert_difference 'UserHabitDeadline.count', 1 do

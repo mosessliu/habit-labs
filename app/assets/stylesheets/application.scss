@@ -140,12 +140,22 @@ html, body {
   color: darkslategrey;
   font-size: 1.35em;
   font-weight: 300;
+  text-decoration: none;
+}
+
+.custom-btn:visited {
+  border-bottom-color:rgba(255,255,255,0);
 }
 
 .custom-btn:hover{
   color: lightgray;
   text-decoration: none;
 }
+
+.custom-btn:active {
+  text-decoration: none;
+}
+
 
 .complete-habit {
   background-color:rgb(198, 255, 242);

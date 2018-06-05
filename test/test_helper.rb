@@ -15,7 +15,6 @@ class ActiveSupport::TestCase
     get user_path(user)
   end
 
-
   def add_participant_to_habit(participant)
     post habits_add_participant_path(added_participant: participant.id), xhr: true
   end
@@ -40,6 +39,10 @@ class ActiveSupport::TestCase
       add_participant_to_habit(participant)
     end
     create_habit(habit, true)
+  end
+
+  def accept_habit(habit)
+    post accept_habit_invitation_path(habit_id: habit)
   end
 
 end
