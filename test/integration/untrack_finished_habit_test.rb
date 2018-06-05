@@ -5,7 +5,7 @@ class DeleteFinishedHabitTest < ActionDispatch::IntegrationTest
 
   test 'delete a finished habit, owned by 1 user' do
     bob = users(:bob)
-    habit = habits(:habit1)
+    habit = habits(:habit_with_duration_3)
 
     sign_in(bob)
     create_habit(habit)
@@ -20,12 +20,12 @@ class DeleteFinishedHabitTest < ActionDispatch::IntegrationTest
 
     assert_difference 'bob.habits.count', -1 do 
 
-      # :habit1 has a duration of 3
+      # :habit_with_duration_3 has a duration of 3
       assert_difference 'UserHabitDeadline.count', -3 do
         
         # habit is removed from database because nobody owns it anymore
         assert_difference 'Habit.count', -1 do
-          post unfollow_finished_habit_path(habit_id: habit.id), xhr: true
+          post untrack_finished_habit_path(habit_id: habit.id), xhr: true
         end
       end
     end
@@ -34,7 +34,7 @@ class DeleteFinishedHabitTest < ActionDispatch::IntegrationTest
   test 'delete a finished habit, owned by 2 users' do
     bob = users(:bob)
     kate = users(:kate)
-    habit = habits(:habit1)
+    habit = habits(:habit_with_duration_3)
 
     sign_in(bob)
     get new_habit_path
@@ -57,12 +57,13 @@ class DeleteFinishedHabitTest < ActionDispatch::IntegrationTest
 
     assert_difference 'bob.habits.count', -1 do 
 
-      # :habit1 has a duration of 3
+      # :habit_with_duration_3 has a duration of 3, 
+      # so there should be 3 less deadlines when the the user untracks this habit
       assert_difference 'UserHabitDeadline.count', -3 do
         
-        # habit is removed from database because nobody owns it anymore
-        assert_difference 'Habit.count', 0 do
-          post unfollow_finished_habit_path(habit_id: habit.id), xhr: true
+        # habit is not removed yet from database because kate still tracks
+        assert_no_difference 'Habit.count' do
+          post untrack_finished_habit_path(habit_id: habit.id), xhr: true
         end
       end
     end
@@ -74,12 +75,12 @@ class DeleteFinishedHabitTest < ActionDispatch::IntegrationTest
     
     assert_difference 'kate.habits.count', -1 do 
 
-      # :habit1 has a duration of 3
+      # :habit_with_duration_3 has a duration of 3
       assert_difference 'UserHabitDeadline.count', -3 do
         
         # habit is removed from database because nobody owns it anymore
         assert_difference 'Habit.count', -1 do
-          post unfollow_finished_habit_path(habit_id: habit.id), xhr: true
+          post untrack_finished_habit_path(habit_id: habit.id), xhr: true
         end
       end
     end

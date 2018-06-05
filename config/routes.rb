@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'build_habit_new', to: 'habits#build_habit_new'
   post 'build_habit_refresh', to: 'habits#build_habit_refresh'
 
-  post 'unfollow_finished_habit', to: 'habits#unfollow_finished_habit'
+  post 'untrack_finished_habit', to: 'habits#untrack_finished_habit'
 
   post 'create_refreshed_habit', to: 'habits#create_refreshed_habit'
   post 'accept_habit_invitation', to: 'habits#accept_habit_invitation'

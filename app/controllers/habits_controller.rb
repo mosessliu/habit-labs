@@ -87,13 +87,21 @@ class HabitsController < ApplicationController
 
   def refresh_habit
     @habit = Habit.find(params[:habit_id])
-    set_default_participants(@habit.users)
-    render 'habits/set_participants_refresh'
+    if @habit.finished and current_user.habits.include?(@habit)
+      set_default_participants(@habit.users)
+      render 'habits/set_participants_refresh'
+    else
+      redirect_to root_path
+    end
   end
 
   def build_habit_refresh
     @habit = Habit.find(params[:habit_id])
-    render 'habits/build_habit_refresh'
+    if @habit.finished and current_user.habits.include?(@habit)
+      render 'habits/build_habit_refresh'
+    else
+      redirect_to root_path
+    end
   end
 
   def create_refreshed_habit
@@ -113,21 +121,23 @@ class HabitsController < ApplicationController
     end
   end
 
-  def unfollow_finished_habit
+  def untrack_finished_habit
     habit = Habit.find(params[:habit_id])
     user_habit = UserHabit.where(user_id: current_user.id, habit_id: habit.id).first
-    user_habit.destroy!
 
-    if habit.users.count == 0
-      habit.destroy!
+    if habit.finished and user_habit.present?
+
+      user_habit.destroy!
+      @habits = current_user.habits
+
+      respond_to do |format|
+        format.js {render partial: 'users/response_to_untrack_finished_habit.js'}
+      end
+
+      if habit.users.count == 0
+        habit.destroy!
+      end
     end
-
-    @habits = current_user.habits
-
-    respond_to do |format|
-      format.js {render partial: 'users/response_to_unfollow_finished_habit.js'}
-    end
-
   end
 
   private
