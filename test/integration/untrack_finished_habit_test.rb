@@ -56,12 +56,9 @@ class DeleteFinishedHabitTest < ActionDispatch::IntegrationTest
     habit = bob.habits.last
 
     assert_difference 'bob.habits.count', -1 do 
-
-      # :habit_with_duration_3 has a duration of 3, 
-      # so there should be 3 less deadlines when the the user untracks this habit
+      # there should be 3 less deadlines when the the user untracks this habit
       assert_difference 'UserHabitDeadline.count', -3 do
-        
-        # habit is not removed yet from database because kate still tracks
+        # habit is not removed yet from database because kate still tracks it
         assert_no_difference 'Habit.count' do
           post untrack_finished_habit_path(habit_id: habit.id), xhr: true
         end
@@ -74,16 +71,16 @@ class DeleteFinishedHabitTest < ActionDispatch::IntegrationTest
     assert kate.habits.last == habit
     
     assert_difference 'kate.habits.count', -1 do 
-
-      # :habit_with_duration_3 has a duration of 3
       assert_difference 'UserHabitDeadline.count', -3 do
-        
         # habit is removed from database because nobody owns it anymore
         assert_difference 'Habit.count', -1 do
           post untrack_finished_habit_path(habit_id: habit.id), xhr: true
         end
       end
     end
+
+    assert_select "a[href=?]", habit_path(habit), false
+
   end
   
 end
