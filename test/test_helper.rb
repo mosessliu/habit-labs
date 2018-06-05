@@ -17,13 +17,20 @@ class ActiveSupport::TestCase
     get user_path(user)
   end
 
+  def force_finish_habit(habit)
+    habit.end_datetime = DateTime.current - 1000
+    habit.save
+    get user_path()
+  end
+
   #requires logged in user, 
   #gets new_habit_path to assign participant, 
   #then posts the new habit
   
-  def create_habit(habit)
-    get new_habit_path
-
+  def create_habit(habit, participants_already_assigned = false)
+    if not participants_already_assigned
+      get new_habit_path
+    end
     post habits_path(habit: {
       name: habit.name, 
       description: habit.description,
@@ -31,4 +38,5 @@ class ActiveSupport::TestCase
       duration: habit.duration
     })
   end
+
 end

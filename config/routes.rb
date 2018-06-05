@@ -16,12 +16,13 @@ Rails.application.routes.draw do
   get 'build_habit_new', to: 'habits#build_habit_new'
   post 'build_habit_refresh', to: 'habits#build_habit_refresh'
 
+  post 'unfollow_finished_habit', to: 'habits#unfollow_finished_habit'
+
   post 'create_refreshed_habit', to: 'habits#create_refreshed_habit'
   post 'accept_habit_invitation', to: 'habits#accept_habit_invitation'
   
   get 'refresh_habit', to: 'habits#refresh_habit'
   patch 'complete_habit', to: 'user_habit_deadlines#complete_habit'
-  
   
   get 'notifications', to: 'notifications#notifications'
   get 'show_habit_invitation', to: 'notifications#show_habit_invitation'

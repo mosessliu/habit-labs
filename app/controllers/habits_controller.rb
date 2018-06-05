@@ -113,6 +113,23 @@ class HabitsController < ApplicationController
     end
   end
 
+  def unfollow_finished_habit
+    habit = Habit.find(params[:habit_id])
+    user_habit = UserHabit.where(user_id: current_user.id, habit_id: habit.id).first
+    user_habit.destroy!
+
+    if habit.users.count == 0
+      habit.destroy!
+    end
+
+    @habits = current_user.habits
+
+    respond_to do |format|
+      format.js {render partial: 'users/response_to_unfollow_finished_habit.js'}
+    end
+
+  end
+
   private
   def set_default_participant
     session[:new_habit_participants] = [current_user.id]

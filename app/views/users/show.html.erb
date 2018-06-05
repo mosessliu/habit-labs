@@ -4,5 +4,7 @@
 <%= render 'shared/habit_row.html', habits: @active_habits%>
 <hr>
 <h4 style="margin-bottom:15px">My Finished Habits</h4>
-<%= render 'shared/habit_row.html', habits: @finished_habits%>
+<div id="finished-habits">
+  <%= render 'shared/habit_row.html', habits: @finished_habits%>
+</div>
 

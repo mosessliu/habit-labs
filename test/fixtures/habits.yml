@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+habit1:
   name: MyString
   description: MyText
-  duration: 1
+  duration: 3
   frequency: 1
+  finished: false
 
-two:
-  name: MyString
-  description: MyText
+habit2:
+  name: Run run run
+  description: I love running
   duration: 1
   frequency: 1
+  finished: false

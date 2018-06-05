@@ -20,7 +20,6 @@ class UsersController < ApplicationController
 
   def search
     param = params[:Search_friends]
-    puts param
     if param.blank?
       @results = nil
     else
